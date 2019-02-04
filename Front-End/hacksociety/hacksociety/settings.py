@@ -57,7 +57,7 @@ ROOT_URLCONF = 'hacksociety.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'hacksociety')],
+        'DIRS': [os.path.join(BASE_DIR, 'hacksociety/templates/hacksociety')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
