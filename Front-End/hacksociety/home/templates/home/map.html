@@ -1,1 +1,25 @@
-<h1>hello</h1>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+<HTML>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+{% block content %}
+
+<HEAD>
+<!--<img src="{% static "home/images/wallpaper.jpg" %}" alt="My image"/>-->
+
+<TITLE>CS 141</TITLE>
+
+</HEAD>
+
+<BODY background="{% static "home/images/WALLPAPER.jpg" %}">
+    <img src="{% static "img/zipcode.jpg" %}" style="width:700px; margin-left: auto;
+  margin-right: auto; display: block"></img>
+
+
+</body>
+{% endblock content %}
+
+</html>
