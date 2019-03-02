@@ -4,7 +4,7 @@
 
 <HTML>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 {% block content %}
 
 <HEAD>
@@ -14,7 +14,7 @@
 <style>
       /* Set the size of the div element that contains the map */
      #map {
-       height: 400px;  /* The height is 400 pixels */
+       height: 700px;  /* The height is 400 pixels */
        width: 100%;  /* The width is the width of the web page */
        background-color: grey;
       }
@@ -24,16 +24,26 @@
 <BODY background="{% static "home/images/WALLPAPER.jpg" %}">
     <!-- <img src="{% static "img/zipcode.jpg" %}" style="width:700px; margin-left: auto;
   margin-right: auto; display: block"></img> -->
+  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
   <div id="map">
       <script>
      // Initialize and add the map
+     function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+
      function initMap() {
-       // The location of Uluru
 
        var mapOptions = {
-          zoom: 11,
-          center: new google.maps.LatLng(34.0522,-118.2437)
+          zoom: 13,
+          center: new google.maps.LatLng(33.98923126510881,-118.24336835307383)
         }
 
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -41,14 +51,32 @@
         // var transitLayer = new google.maps.TransitLayer();
         // transitLayer.setMap(map);
 
-        map.data.loadGeoJson("{% static "data/ZIPCodes.geojson" %}")
+        map.data.loadGeoJson("{% static "data/ZIPCodes.geojson" %}");
+
+        var infowindow = new google.maps.InfoWindow();
+        map.data.setStyle({
+          fillColor: 'green',
+          strokeWeight: 1
+        });
+
+        // this is called when clicked
+        map.data.addListener('click', function(event) {
+           map.data.overrideStyle(event.feature, {fillColor: getRandomColor()});
+
+           // set the p at bottom of html
+           document.getElementById("test").innerHTML = event.feature.getProperty("zipcode");
+
+        });
+
      }
          </script>
          <script async defer
          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_LfoOPm7CqUBulpoz9NoSTIlECyzYPic&callback=initMap">
          </script>
+
   </div>
 
+  <p id="test">Hello</p>
 
 </body>
 {% endblock content %}
