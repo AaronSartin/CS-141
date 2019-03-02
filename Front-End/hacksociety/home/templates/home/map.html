@@ -53,7 +53,11 @@
 
         map.data.loadGeoJson("{% static "data/ZIPCodes.geojson" %}");
 
-        var infowindow = new google.maps.InfoWindow();
+        var infowindow = new google.maps.InfoWindow({
+          content: "hello"
+        });
+
+
         map.data.setStyle({
           fillColor: 'green',
           strokeWeight: 1
@@ -63,8 +67,26 @@
         map.data.addListener('click', function(event) {
            map.data.overrideStyle(event.feature, {fillColor: getRandomColor()});
 
+           var zipcode = event.feature.getProperty("zipcode");
+           var zippath = 'img/zipcode.jpg';
+           // var graphimg = "/staticdataimg/" + zipcode + ".png";
+           var s = "1234"
+
+
+
+           var content = '<div id="content">'+
+           '<h1 id="firstHeading" class="firstHeading">' + zipcode + '</h1>'+
+           '<div id="bodyContent">'+
+           '<p>The graph will go here</p>'+
+           '<img src="" style="max-width:100%; max-height:100%; margin-left: auto; margin-right: auto; display: block"</img>'
+           '</div>'+
+           '</div>';
+
            // set the p at bottom of html
            document.getElementById("test").innerHTML = event.feature.getProperty("zipcode");
+           infowindow.setPosition(event.latLng);
+           infowindow.setContent(content);
+           infowindow.open(map);
 
         });
 
