@@ -7,4 +7,6 @@ def index(request):
     return render(request, 'home/index.html', context)
 
 def map(request):
-    return render(request, 'home/map.html', {})
+    images = [1,2]
+    context = {'images': images}
+    return render(request, 'home/map.html', context)
