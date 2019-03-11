@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load static %}
-{% load extras %}
 
 <HTML>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -45,7 +44,7 @@
 
        var mapOptions = {
           zoom: 13,
-          center: new google.maps.LatLng(33.98923126510881,-118.24336835307383)
+          center: new google.maps.LatLng(34.1377,-118.1253)
         }
 
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -70,20 +69,23 @@
            map.data.overrideStyle(event.feature, {fillColor: getRandomColor()});
 
            var zipcode = event.feature.getProperty("zipcode");
-           var zippath = '/media/mu/' + zipcode + '.png';
+           var zippathp = '/media/p/' + zipcode + '.png';
+           var zippathmu = '/media/mu/' + zipcode + '.png';
+           var zippathsig = '/media/sig/' + zipcode + '.png';
+
            // var zippath = '/media/zipcode.jpg';
 
            // var graphimg = "/staticdataimg/" + zipcode + ".png";
            var s = "1234"
 
-           var x = "hello"
-
-
            var content = '<div id="content">'+
            '<h1 id="firstHeading" class="firstHeading">' + zipcode + '</h1>'+
            '<div id="bodyContent">'+
-           '<p>The graph will go here {% lookup arg_value %} </p>'+
-           '<img src="'+ zippath +'" style="max-width:100%; max-height:100%; margin-left: auto; margin-right: auto; display: block"</img>'
+           '<p>This zipcode has the following parameters for fitted values of p, mu, and sigma.</p>'+
+           '<img src="'+ zippathp +'" style="max-width:100%; max-height:100%; margin-left: auto; margin-right: auto; display: block"</img>'+
+           '<img src="'+ zippathmu +'" style="max-width:100%; max-height:100%; margin-left: auto; margin-right: auto; display: block"</img>'+
+           '<img src="'+ zippathsig +'" style="max-width:100%; max-height:100%; margin-left: auto; margin-right: auto; display: block"</img>'+
+
            '</div>'+
            '</div>';
 
@@ -104,7 +106,6 @@
          </script>
 
   </div>
-  <img class="img-responsive" src="/media/mu/90001.png"/>
 
 
 
